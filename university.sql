@@ -1,10 +1,10 @@
---CREATE DATABASE university_db
+--CREATE DATABASE university_db;
 
 CREATE TABLE faculties (
     faculty_id SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL UNIQUE,
     dean_name VARCHAR(100) NOT NULL,
-    founded_year INT CHECK (founded_year > 1900 AND founded_year <= EXTRACT(YEAR FROM CURRENT_DATE))
+    founded_year INT CHECK (founded_year > 1900)
 );
 
 CREATE TABLE departments (
@@ -26,7 +26,7 @@ CREATE TABLE student_groups (
 CREATE TABLE students (
     student_id SERIAL PRIMARY KEY,
     full_name VARCHAR(150) NOT NULL,
-    birth_date DATE CHECK (birth_date < CURRENT_DATE - INTERVAL '15 years'),
+    birth_date DATE,
     group_id INT NOT NULL,
     enrollment_year INT NOT NULL,
     status VARCHAR(50) DEFAULT 'учится' CHECK (status IN ('учится', 'отчислен', 'выпускник', 'академ')),
@@ -96,18 +96,18 @@ CREATE TABLE scholarships (
 );
 
 INSERT INTO faculties (name, dean_name, founded_year) VALUES
-('Физико-технический факультет', 'Иванов И.И.', 1970),
-('Факультет компьютерных технологий', 'Петров П.П.', 1995),
-('Экономический факультет', 'Сидоров С.С.', 1985),
-('Юридический факультет', 'Алексеев А.А.', 1990),
-('Филологический факультет', 'Смирнова С.В.', 1975);
+    ('Физико-технический факультет', 'Иванов И.И.', 1970),
+    ('Факультет компьютерных технологий', 'Петров П.П.', 1995),
+    ('Экономический факультет', 'Сидоров С.С.', 1985),
+    ('Юридический факультет', 'Алексеев А.А.', 1990),
+    ('Филологический факультет', 'Смирнова С.В.', 1975);
 
 INSERT INTO departments (name, head_name, faculty_id) VALUES
-('Кафедра теоретической физики', 'Морозов М.М.', 1),
-('Кафедра информационных технологий', 'Васильев В.В.', 2),
-('Кафедра прикладной математики', 'Кузнецов К.К.', 2),
-('Кафедра гражданского права', 'Николаев Н.Н.', 4),
-('Кафедра экономики', 'Борисов Б.Б.', 3);
+    ('Кафедра теоретической физики', 'Морозов М.М.', 1),
+    ('Кафедра информационных технологий', 'Васильев В.В.', 2),
+    ('Кафедра прикладной математики', 'Кузнецов К.К.', 2),
+    ('Кафедра гражданского права', 'Николаев Н.Н.', 4),
+    ('Кафедра экономики', 'Борисов Б.Б.', 3);
 
 INSERT INTO student_groups (group_number, course_year, specialty, curator_name) VALUES
 ('ФТ-101', 1, 'Радиофизика', 'Морозов М.М.'),
